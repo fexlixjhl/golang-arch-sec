@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -12,7 +13,7 @@ type person struct {
 
 func main() {
 
-	p1 := person{
+	/* p1 := person{
 		First: "Jenny",
 	}
 
@@ -37,6 +38,18 @@ func main() {
 		log.Panic(err)
 	}
 	
-	fmt.Println("back into a Go data structure", xp2)
+	fmt.Println("back into a Go data structure", xp2) */
 
+	http.HandleFunc("/encode", foo)
+	http.HandleFunc("/decode", bar)
+	http.ListenAndServe(":8080", nil)
+
+}
+
+func foo(w http.ResponseWriter, r *http.Request){
+
+}
+
+func bar(w http.ResponseWriter, r *http.Request){
+	
 }
