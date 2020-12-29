@@ -39,25 +39,30 @@ func main() {
 
 	fmt.Println("back into a Go data structure", xp2) */
 
-	http.HandleFunc("/encode", foo)
-	http.HandleFunc("/decode", bar)
+	http.HandleFunc("/encode", encode)
+	http.HandleFunc("/decode", decode)
 	http.ListenAndServe(":8080", nil)
 
 }
 
-func foo(w http.ResponseWriter, r *http.Request) {
+func encode(w http.ResponseWriter, r *http.Request) {
 	p1 := person{
 		First: "Jenny",
 	}
-
-	err := json.NewEncoder(w).Encode(p1)
+	
+	p2 := person{
+		First: "James",
+	}
+	people := []person{p1, p2}
+	err := json.NewEncoder(w).Encode(people)
+	
 	if err != nil {
 		log.Println("Encoded bad data", err)
 	}
 
 }
 
-func bar(w http.ResponseWriter, r *http.Request) {
+func decode(w http.ResponseWriter, r *http.Request) {
 	var p1 person
 	err :=  json.NewDecoder(r.Body).Decode(&p1)
 	if err != nil {
