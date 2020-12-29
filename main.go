@@ -63,11 +63,11 @@ func encode(w http.ResponseWriter, r *http.Request) {
 }
 
 func decode(w http.ResponseWriter, r *http.Request) {
-	var p1 person
-	err :=  json.NewDecoder(r.Body).Decode(&p1)
+	var people []person
+	err :=  json.NewDecoder(r.Body).Decode(&people)
 	if err != nil {
 		log.Println("Decoded bad data", err)
 	}
 	
-	log.Println("Person:", p1)
+	log.Println("People:", people)
 }
